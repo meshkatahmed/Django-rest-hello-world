@@ -1,17 +1,10 @@
 from .models import Status
 from .serializers import StatusSerializer
 
-from rest_framework.views import APIView
-from rest_framework.response import Response
-
-from rest_framework import generics,mixins
+from rest_framework import viewsets,parsers
 
 # Create your views here.
-class StatusListCreateAPIView(generics.ListCreateAPIView):
+class StatusViewset(viewsets.ModelViewSet):
     queryset = Status.objects.all()
     serializer_class = StatusSerializer
-
-class StatusDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Status.objects.all()
-    serializer_class = StatusSerializer
-    lookup_field = 'id'
+    parser_classes = [parsers.FormParser,parsers.MultiPartParser]

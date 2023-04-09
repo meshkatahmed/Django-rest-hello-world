@@ -1,7 +1,8 @@
 from django.urls import path
-from .views import StatusListCreateAPIView,StatusDetailAPIView
+from .views import StatusViewset
+from rest_framework.routers import DefaultRouter
 
-urlpatterns = [
-    path('status/',StatusListCreateAPIView.as_view()),
-    path('status/<id>/',StatusDetailAPIView.as_view()),
-]
+router = DefaultRouter()
+router.register(r'status',StatusViewset,basename='status')
+
+urlpatterns = [] + router.urls
